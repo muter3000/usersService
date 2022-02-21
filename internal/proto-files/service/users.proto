@@ -1,0 +1,35 @@
+syntax = "proto3";
+option go_package = ".;service";
+
+service UsersService {
+  rpc AddUser (AddUserRequest) returns (AddUserResponse);
+}
+
+message UserPublic {
+  int64 id  = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string nickname = 4;
+  string email = 5;
+  string country = 6;
+}
+
+message UserPrivate {
+  string password = 1;
+}
+
+message AddUserRequest {
+  UserPublic public = 1;
+  UserPrivate private = 2;
+}
+
+message AddUserResponse{
+  string user_id = 1;
+  string created_at = 2;
+  Error err = 3;
+}
+
+message Error {
+  string code = 1;
+  string message = 2;
+}
